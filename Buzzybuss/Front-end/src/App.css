@@ -1,0 +1,21 @@
+.app-container {
+  display: flex;
+}
+.content {
+  width: 100%;
+}
+.sign-up {
+  width: 50%;
+  margin-top: 50px;
+  margin-left: 25%;
+}
+.log-in {
+  width: 50%;
+  margin-top: 50px;
+  margin-left: 25%;
+}
+.create-blog {
+  width: 50%;
+  margin-top: 50px;
+  margin-left: 25%;
+}
