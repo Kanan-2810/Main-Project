@@ -58,7 +58,7 @@ function CreateBlog() {
           Image
         </label>
         <input
-          type="text"
+          type="file"
           className="form-control"
           id="image"
           name="name2"
