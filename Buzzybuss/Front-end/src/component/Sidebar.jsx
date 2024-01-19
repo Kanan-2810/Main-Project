@@ -18,7 +18,7 @@ function Sidebar() {
       <hr />
       <ul className="nav nav-pills flex-column mb-auto">
         <li className="nav-item">
-          <Link to="#" className="nav-link active" aria-current="page">
+          <Link to="/create-blog" className="nav-link " aria-current="page">
             <svg className="bi pe-none me-2" width="16" height="16">
               <use xlinkHref="#home"></use>
             </svg>
@@ -26,7 +26,7 @@ function Sidebar() {
           </Link>
         </li>
         <li>
-          <Link to="#" className="nav-link text-white">
+          <Link to="/get-blog" className="nav-link ">
             <svg className="bi pe-none me-2" width="16" height="16">
               <use xlinkHref="#speedometer2"></use>
             </svg>

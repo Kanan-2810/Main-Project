@@ -17,11 +17,11 @@ const router = createBrowserRouter(
     <>
       <Route path="/" element={<App />}>
         <Route path="" element={<Home />} />
+        <Route path="get-blog" element={<GetBlog />} />
+        <Route path="create-blog" element={<CreateBlog />} />
       </Route>
       <Route path="/login" element={<Login />} />
       <Route path="/sign-up" element={<Signup />} />
-      <Route path="/get-blog" element={<GetBlog />} />
-      <Route path="/create-blog" element={<CreateBlog />} />
     </>
   )
 );

@@ -5,7 +5,7 @@ import Sidebar from "./component/Sidebar";
 import Footer from "./component/Footer";
 import Signup from "./pages/Signup";
 import { Outlet, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 function App() {
   const nevigate = useNavigate();

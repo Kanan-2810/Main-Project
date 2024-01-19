@@ -46,7 +46,6 @@ const deleteBlog = async (req, res) => {
   } else {
     return res.status(404).json({ message: result.message });
   }
-  return res.status(200).json({ message: "The Blog is removed successfully" });
 };
 const getByUserId = async (req, res) => {
   const result = await getByUserIdService(req);

@@ -3,13 +3,14 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function CreateBlog() {
+  const nevigate = useNavigate();
+
   const [blog, setBlog] = useState({
     title: "",
     description: "",
     image: "",
     user: "",
   });
-  const nevigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setBlog({ ...blog, [name]: value });
@@ -17,10 +18,15 @@ function CreateBlog() {
   const handleADD = () => {
     console.log("clicked");
     createBlog();
-    nevigate("/get-blog");
+    // nevigate("/get-blog");
   };
   const createBlog = async () => {
-    const data = await axios.post("http://localhost:8000/api/blog/add", blog);
+    console.log("blog: ", blog);
+    const data = await axios.post("http://localhost:8000/api/blog/add", blog, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     if (data) {
       console.log(data.data);
     }
@@ -35,7 +41,7 @@ function CreateBlog() {
           type="text"
           className="form-control"
           id="exampleInputEmail1"
-          name="name"
+          name="title"
           value={blog.name}
           onChange={handleChange}
         />
@@ -48,7 +54,7 @@ function CreateBlog() {
           type="text"
           className="form-control"
           id="exampleInputPassword1"
-          name="name1"
+          name="description"
           value={blog.name1}
           onChange={handleChange}
         />
@@ -58,10 +64,10 @@ function CreateBlog() {
           Image
         </label>
         <input
-          type="file"
+          type="text"
           className="form-control"
           id="image"
-          name="name2"
+          name="image"
           value={blog.name2}
           onChange={handleChange}
         />
@@ -74,7 +80,7 @@ function CreateBlog() {
           type="text"
           className="form-control"
           id="usr-id"
-          name="name3"
+          name="user"
           value={blog.name3}
           onChange={handleChange}
         />
