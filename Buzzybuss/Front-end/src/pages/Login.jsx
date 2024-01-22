@@ -1,4 +1,4 @@
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, json } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -25,6 +25,10 @@ function Login() {
       console.log(data);
       if (data.data.existingUser) {
         sessionStorage.setItem("currentUser", login.email);
+        localStorage.setItem(
+          login.email,
+          JSON.stringify(data.data.existingUser)
+        );
         nevigate("/");
       } else {
         alert(data.data.message);

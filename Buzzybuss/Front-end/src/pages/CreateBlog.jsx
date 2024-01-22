@@ -1,15 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function CreateBlog() {
   const nevigate = useNavigate();
-
   const [blog, setBlog] = useState({
     title: "",
     description: "",
     image: "",
-    user: "",
+    user: "65ae42e255f18c43cb46b19b",
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,7 +17,7 @@ function CreateBlog() {
   const handleADD = () => {
     console.log("clicked");
     createBlog();
-    // nevigate("/get-blog");
+    nevigate("/get-blog");
   };
   const createBlog = async () => {
     console.log("blog: ", blog);
@@ -69,19 +68,6 @@ function CreateBlog() {
           id="image"
           name="image"
           value={blog.name2}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="mb-3">
-        <label for="image" className="form-label">
-          User-ID
-        </label>
-        <input
-          type="text"
-          className="form-control"
-          id="usr-id"
-          name="user"
-          value={blog.name3}
           onChange={handleChange}
         />
       </div>

@@ -63,6 +63,27 @@ const blogs = [
     description: "Description for useStateBlog 10",
     userID: "user789",
   },
+  {
+    id: 10,
+    title: "Blog 10",
+    image: myImage,
+    description: "Description for useStateBlog 10",
+    userID: "user789",
+  },
+  {
+    id: 11,
+    title: "Blog 11",
+    image: myImage,
+    description: "Description for useStateBlog 10",
+    userID: "user789",
+  },
+  {
+    id: 12,
+    title: "Blog 12",
+    image: myImage,
+    description: "Description for useStateBlog 10",
+    userID: "user789",
+  },
 ];
 
 export default blogs;
