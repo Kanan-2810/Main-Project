@@ -1,15 +1,13 @@
 import React from "react";
-import UserContext from "../context/UserContex";
+import { useSelector } from "react-redux";
 
 function About() {
+  const user = useSelector((state) => state.userReducer);
+  console.log("hg", user.user);
   return (
-    <UserContext.Consumer>
-      {({ user }) => {
-        console.log("user:", user);
-
-        return <h1>Welcome {user?.name}</h1>;
-      }}
-    </UserContext.Consumer>
+    <h1 style={{ width: "40rem", backgroundColor: "lightblue" }}>
+      Welcome {user?.user?.name}
+    </h1>
   );
 }
 

@@ -1,10 +1,22 @@
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { CgProfile } from "react-icons/cg";
 function Sidebar() {
+  const user = useSelector((state) => state.userReducer);
+
+  const u_name = user.user.name.split(" ");
+
+  const nevigate = useNavigate();
+  const handleLogout = () => {
+    if (window.confirm("Are You Sure Want to Logout?")) {
+      sessionStorage.clear();
+      nevigate("/login");
+    }
+  };
   return (
     <div
       className="d-flex flex-column flex-shrink-0 p-3 text-bg-dark"
-      style={{ width: "280px", height: "800px" }}
+      style={{ width: "280px", height: "100%", position: "fixed", zIndex: 1 }}
     >
       <Link
         to="/"
@@ -13,12 +25,34 @@ function Sidebar() {
         <svg className="bi pe-none me-2" width="40" height="10">
           <use xlinkHref="#bootstrap"></use>
         </svg>
-        <span className="fs-4">Sidebar</span>
+        <span className="fs-4">BuzzyBuss</span>
       </Link>
       <hr />
       <ul className="nav nav-pills flex-column mb-auto">
-        <li className="nav-item">
-          <Link to="/create-blog" className="nav-link " aria-current="page">
+        <li>
+          <Link to="#" className="nav-link ">
+            <svg className="bi pe-none me-2" width="16" height="16">
+              <use xlinkHref="#home"></use>
+            </svg>
+            <div className="d-flex align-items-center justify-content-center">
+              <h4>
+                <CgProfile />
+              </h4>
+              <h4>&nbsp;{u_name[0]}</h4>
+            </div>
+          </Link>
+        </li>
+        <hr />
+        <li>
+          <Link to="/" className="nav-link ">
+            <svg className="bi pe-none me-2" width="16" height="16">
+              <use xlinkHref="#home"></use>
+            </svg>
+            Home
+          </Link>
+        </li>
+        <li>
+          <Link to="/create-blog" className="nav-link">
             <svg className="bi pe-none me-2" width="16" height="16">
               <use xlinkHref="#home"></use>
             </svg>
@@ -26,12 +60,54 @@ function Sidebar() {
           </Link>
         </li>
         <li>
-          <Link to="/get-blog" className="nav-link ">
+          <Link to="/get-my-blog" className="nav-link">
             <svg className="bi pe-none me-2" width="16" height="16">
               <use xlinkHref="#speedometer2"></use>
             </svg>
-            Blogs
+            MyBlogs
           </Link>
+        </li>
+        <li>
+          <Link to="#" className="nav-link">
+            <svg className="bi pe-none me-2" width="16" height="16">
+              <use xlinkHref="#home"></use>
+            </svg>
+            Features
+          </Link>
+        </li>
+        <li>
+          <Link to="#" className="nav-link">
+            <svg className="bi pe-none me-2" width="16" height="16">
+              <use xlinkHref="#home"></use>
+            </svg>
+            Pricing
+          </Link>
+        </li>
+        <li>
+          <Link to="#" className="nav-link">
+            <svg className="bi pe-none me-2" width="16" height="16">
+              <use xlinkHref="#home"></use>
+            </svg>
+            FAQs
+          </Link>
+        </li>
+        <li>
+          <Link to="/about" className="nav-link">
+            <svg className="bi pe-none me-2" width="16" height="16">
+              <use xlinkHref="#home"></use>
+            </svg>
+            About
+          </Link>
+        </li>
+        <li
+          style={{ cursor: "pointer" }}
+          className="nav-link "
+          onClick={handleLogout}
+        >
+          <svg className="bi pe-none me-2" width="16" height="16">
+            <use xlinkHref="#home"></use>
+          </svg>
+          Logout
         </li>
       </ul>
       <hr />

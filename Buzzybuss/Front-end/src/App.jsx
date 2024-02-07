@@ -3,42 +3,56 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./component/Header";
 import Sidebar from "./component/Sidebar";
 import Footer from "./component/Footer";
-
+import { useSelector, useDispatch } from "react-redux";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import UserContext from "./context/UserContex";
-import BlogContext from "./context/BlogContext";
-
+import setUser from "./store/user/action";
+import axios from "axios";
 function App() {
   const nevigate = useNavigate();
-  let userData;
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const data = sessionStorage.getItem("currentUser");
     if (!data) {
       nevigate("/login");
     }
-    userData = JSON.parse(localStorage.getItem(data));
   }, []);
 
-  return (
-    <BlogContext.Consumer>
-      <UserContext.Consumer>
-        {({ user, setUser }) => {
-          setUser(userData);
+  useEffect(() => {
+    const data = sessionStorage.getItem("currentUser");
+    const userData = JSON.parse(localStorage.getItem(data));
+    // console.log("hjgsd", userData);
+    dispatch({
+      type: "set-user",
+      payload: userData,
+    });
+    // console.log("USER", userData);
+    getBlogs();
+  }, []);
+  const getBlogs = async () => {
+    const data = await axios.get("http://localhost:8000/api/blog");
+    console.log(data);
+    dispatch({
+      type: "set-blog",
+      payload: data.data.blogs,
+    });
+  };
 
-          return (
-            <div className="app-container">
-              <Sidebar />
-              <div className="content">
-                <Header />
-                <Outlet />
-                <Footer />
-              </div>
-            </div>
-          );
-        }}
-      </UserContext.Consumer>
-    </BlogContext.Consumer>
+  return (
+    <div className="app-container">
+      <Sidebar />
+      <div className="content">
+        <Header />
+        <div
+          className="d-flex justify-content-center "
+          style={{ marginLeft: "20rem", marginTop: "2rem" }}
+        >
+          <Outlet />
+        </div>
+        <Footer />
+      </div>
+    </div>
   );
 }
 

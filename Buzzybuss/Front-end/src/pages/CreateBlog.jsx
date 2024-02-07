@@ -1,21 +1,41 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import axios from "axios";
-
+import { Buffer } from "buffer";
 function CreateBlog() {
+  const user = useSelector((state) => state.userReducer);
   const nevigate = useNavigate();
   const [blog, setBlog] = useState({
     title: "",
     description: "",
     image: "",
-    user: "65ae42e255f18c43cb46b19b",
+    user: user.user?._id,
   });
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setBlog({ ...blog, [name]: value });
+    const { name, value, files } = e.target;
+  
+    if (name === "image" && files.length > 0) {
+      const selectedImage = files[0];
+  
+      const reader = new FileReader();
+  
+      reader.onload = (event) => {
+        const base64String = event.target.result;
+        setBlog({ ...blog, image: base64String });
+        console.log("Base64 String:", base64String);
+      };
+  
+      reader.readAsDataURL(selectedImage);
+    } else {
+      setBlog({ ...blog, [name]: value });
+    }
   };
+  
+
   const handleADD = () => {
     console.log("clicked");
+    console.log(blog);
     createBlog();
     nevigate("/get-blog");
   };
@@ -32,7 +52,7 @@ function CreateBlog() {
   };
   return (
     <form className="create-blog">
-      <div className="mb-3">
+      <div className="mb-3 ">
         <label for="name" className="form-label">
           Title
         </label>
@@ -41,7 +61,7 @@ function CreateBlog() {
           className="form-control"
           id="exampleInputEmail1"
           name="title"
-          value={blog.name}
+          value={blog.title}
           onChange={handleChange}
         />
       </div>
@@ -54,7 +74,7 @@ function CreateBlog() {
           className="form-control"
           id="exampleInputPassword1"
           name="description"
-          value={blog.name1}
+          value={blog.description}
           onChange={handleChange}
         />
       </div>
@@ -63,11 +83,11 @@ function CreateBlog() {
           Image
         </label>
         <input
-          type="text"
+          type="file"
           className="form-control"
           id="image"
           name="image"
-          value={blog.name2}
+          value={blog.image}
           onChange={handleChange}
         />
       </div>

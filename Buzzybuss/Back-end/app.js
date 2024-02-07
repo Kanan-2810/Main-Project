@@ -5,8 +5,11 @@ const mongoose = require("mongoose");
 const connectDB = require("./db/connect");
 const router = require("./routes/user-routes");
 const Blogrouter = require("./routes/Blog-routes");
+const bodyParser = require("body-parser");
 const app = express();
 app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true, limit: "10mb" }));
+
 app.use(
   cors({
     origin: "http://localhost:5173",
